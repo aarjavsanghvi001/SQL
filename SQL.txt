@@ -1,0 +1,99 @@
+## SQL statement structure and order of execution:
+
+SELECT                          5
+FROM / JOIN                     1
+WHERE                           2
+GROUP BY                        3
+HAVING                          4
+ORDER BY                        6
+LIMIT / OFFSET                  7
+
+
+## SQL commands:
+
+1. UPDATE - updates data in a database
+2. CREATE INDEX - creates an index (search key)
+3. DROP INDEX - deletes an index
+4. CONCAT - The CONCAT() function adds two or more strings together.
+5. DATEPART - Return a specified part of a date
+6. CREATE TABLE - creates a new table
+7. ALTER TABLE - modifies a table
+8. TRIM - Remove leading and trailing spaces from a string
+9. CREATE DATABASE - creates a new database
+10. ALTER DATABASE - modifies a database
+
+11. DELETE - deletes data from a database
+
+'''sql
+  DELETE FROM table_name WHERE condition;
+'''
+
+12. INSERT INTO - inserts new data into a database
+
+```sql
+SELECT column1, column2, column3, ...
+INTO newtable [IN externaldb]
+FROM oldtable
+WHERE condition;
+```
+
+13. DROP TABLE - deletes a table
+
+'''sql
+DROP TABLE table_name;
+DROP TABLE IF EXISTS table_name;
+'''
+
+14. ROW NUMBER - displays the number of a given row
+
+```sql
+ROW_NUMBER() OVER (PARTITION BY start_terminal ORDER BY start_time)
+```
+
+15. RANK and DENSE RANK - 
+- `RANK()` would give the identical rows a rank of 2, then skip ranks 3 and 4, so the next result would be 5
+- `DENSE_RANK()` would still give all the identical rows a rank of 2, but the following row would be 3—no ranks would be skipped.
+
+```sql
+RANK() OVER (PARTITION BY start_terminal ORDER BY start_time)
+```
+
+16. NTILE - You can use window functions to identify what percentile (or quartile, or any other subdivision) a given row falls into.
+
+```sql
+NTILE(4) OVER (PARTITION BY start_terminal ORDER BY duration_seconds) AS quartile
+```
+
+17. LEAD and LAG - `LAG` pulls from previous rows and `LEAD` pulls from following rows
+
+```sql
+LAG(duration_seconds, 1) OVER (PARTITION BY start_terminal ORDER BY duration_seconds) AS lag,
+LEAD(duration_seconds, 1) OVER (PARTITION BY start_terminal ORDER BY duration_seconds) AS lead
+```
+
+18. COALESCE - Return the first non-null value in a listReturn the first non-null value in a list.
+
+```sql
+COALESCE(*val1*, *val2*, *....*, *val_n*)
+```
+
+19. NULLIF - The NULLIF() function returns NULL if two expressions are equal, otherwise it returns the first expression.
+
+```sql
+NULLIF(*expr1*, *expr2*)
+```
+
+20. DATEDIFF - Return the difference between two date values
+
+```sql
+DATEDIFF(*interval*, *date1*, *date2*)
+```
+
+21. STORED PROCEDURE - A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+
+'''sql
+CREATE PROCEDURE procedure_name
+AS
+sql_statement
+GO;
+'''
